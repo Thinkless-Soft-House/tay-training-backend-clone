@@ -1,0 +1,67 @@
+<form #formModel="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="pat@example.com"
+      type="email"
+      name="email"
+      autocomplete="email"
+      [(ngModel)]="form.email"
+      (ngModelChange)="changeFormValue()"
+      email
+      required
+    />
+    <mat-error *ngIf="getControl(formModel, 'email')">{{
+      getErrorMessage(formModel, "email")
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Senha</mat-label>
+    <input
+      matInput
+      [type]="passwordToogleVisibility ? 'password' : 'text'"
+      name="password"
+      autocomplete="current-password"
+      [(ngModel)]="form.password"
+      (ngModelChange)="changeFormValue()"
+      required
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="passwordToogleVisibility = !passwordToogleVisibility"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="passwordToogleVisibility"
+    >
+      <mat-icon>{{
+        passwordToogleVisibility ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </button>
+    <mat-error *ngIf="getControl(formModel, 'email')">{{
+      getErrorMessage(formModel, "password")
+    }}</mat-error>
+  </mat-form-field>
+
+  <div class="alternative-links">
+    <a (click)="goToForgotPassword()">Esqueceu a senha?</a>
+  </div>
+
+  <div class="form-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!formModel.valid"
+      (click)="submit()"
+    >
+      Entrar
+    </button>
+  </div>
+
+  <div class="alternative-links" *ngIf="showSignIn">
+    <span>
+      Não tem uma conta?
+      <a (click)="goToSignUp()"> Cadastre-se </a>
+    </span>
+  </div>
+</form>

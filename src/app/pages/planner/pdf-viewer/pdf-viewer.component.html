@@ -1,0 +1,30 @@
+<mat-toolbar>
+  <button
+    class="menu-btn"
+    aria-label="Menu Toggle"
+    mat-icon-button
+    (click)="back()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span> PDF Offline </span>
+  <span class="spacer"></span>
+  <button
+    class="menu-btn"
+    aria-label="Menu Toggle"
+    mat-icon-button
+    (click)="back()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</mat-toolbar>
+
+<ng-container *ngIf="load">
+  <ngx-extended-pdf-viewer
+    *ngIf="fileUrl"
+    [src]="fileUrl"
+    [useBrowserLocale]="true"
+    [showDrawEditor]="false"
+    [showOpenFileButton]="false"
+  ></ngx-extended-pdf-viewer>
+</ng-container>

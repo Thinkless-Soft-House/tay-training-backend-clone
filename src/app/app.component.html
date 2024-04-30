@@ -1,0 +1,42 @@
+<ng-container *ngIf="!showSideBar">
+  <main>
+    <div class="password" *ngIf="false">
+      <div class="password-form">
+        <mat-form-field>
+          <mat-label>Senha do treino</mat-label>
+          <input matInput [(ngModel)]="passwordInput" />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          class="password-button"
+          (click)="validatePassword()"
+        >
+          Abrir treino
+        </button>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+</ng-container>
+<ng-container *ngIf="showSideBar">
+  <main>
+    <mat-drawer-container class="drawer-container" [hasBackdrop]="false">
+      <mat-drawer #drawer mode="side" opened>
+        <div class="side-menu">
+          <app-side-menu [atualRoute]="atualRoute"> </app-side-menu>
+        </div>
+      </mat-drawer>
+      <mat-drawer-content>
+        <app-header
+          [title]="headerTitle"
+          [showMenuBtn]="true"
+          (toggleMenu)="drawer.toggle()"
+          (goToProfile)="goToProfile()"
+          (logout)="logout()"
+        ></app-header>
+        <router-outlet></router-outlet>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </main>
+</ng-container>

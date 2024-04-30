@@ -1,0 +1,464 @@
+<section class="master mat-elevation-z2">
+  <div class="loading-shade all" *ngIf="loadingService.loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <form class="form" #reactiveForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ form["name"].label }}</mat-label>
+          <input
+            matInput
+            [type]="form['name'].config.type"
+            [name]="form['name'].config.name"
+            [(ngModel)]="form['name'].value"
+            [placeholder]="form['name'].config.placeholder"
+            [disabled]="form['name'].config.disabled"
+            [readonly]="form['name'].config.readonly"
+            [required]="form['name'].config.required"
+            [minlength]="form['name'].config.minlength"
+            [maxlength]="form['name'].config.maxlength"
+            [pattern]="form['name'].config.pattern"
+            [email]="form['name'].config.email"
+            [mask]="
+              form['name'].config.mask && form['name'].config.maskConfig.mask
+                ? form['name'].config.maskConfig.mask
+                : null
+            "
+            [dropSpecialCharacters]="
+              form['name'].config.mask &&
+              form['name'].config.maskConfig.dropSpecialCharacters
+                ? form['name'].config.maskConfig.dropSpecialCharacters
+                : true
+            "
+            [validation]="
+              form['name'].config.mask &&
+              form['name'].config.maskConfig.validation
+                ? form['name'].config.maskConfig.validation
+                : false
+            "
+          />
+          <mat-hint *ngIf="form['name'].config.hint">{{
+            form["name"].config.hint
+          }}</mat-hint>
+          <mat-error *ngIf="getErrorText(form['name'])">
+            {{ getErrorText(form["name"]) }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ form["publicName"].label }}</mat-label>
+          <input
+            matInput
+            [type]="form['publicName'].config.type"
+            [name]="form['publicName'].config.name"
+            [(ngModel)]="form['publicName'].value"
+            [placeholder]="form['publicName'].config.placeholder"
+            [disabled]="form['publicName'].config.disabled"
+            [readonly]="form['publicName'].config.readonly"
+            [required]="form['publicName'].config.required"
+            [minlength]="form['publicName'].config.minlength"
+            [maxlength]="form['publicName'].config.maxlength"
+            [pattern]="form['publicName'].config.pattern"
+            [email]="form['publicName'].config.email"
+            [mask]="
+              form['publicName'].config.mask &&
+              form['publicName'].config.maskConfig.mask
+                ? form['publicName'].config.maskConfig.mask
+                : null
+            "
+            [dropSpecialCharacters]="
+              form['publicName'].config.mask &&
+              form['publicName'].config.maskConfig.dropSpecialCharacters
+                ? form['publicName'].config.maskConfig.dropSpecialCharacters
+                : true
+            "
+            [validation]="
+              form['publicName'].config.mask &&
+              form['publicName'].config.maskConfig.validation
+                ? form['publicName'].config.maskConfig.validation
+                : false
+            "
+          />
+          <mat-hint *ngIf="form['publicName'].config.hint">{{
+            form["publicName"].config.hint
+          }}</mat-hint>
+          <mat-error *ngIf="getErrorText(form['publicName'])">
+            {{ getErrorText(form["publicName"]) }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row hide">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ form["offlinePdf"].label }}</mat-label>
+          <input
+            matInput
+            [type]="form['offlinePdf'].config.type"
+            [name]="form['offlinePdf'].config.name"
+            [(ngModel)]="form['offlinePdf'].value"
+            [placeholder]="form['offlinePdf'].config.placeholder"
+            [disabled]="form['offlinePdf'].config.disabled"
+            [readonly]="form['offlinePdf'].config.readonly"
+            [required]="form['offlinePdf'].config.required"
+            [minlength]="form['offlinePdf'].config.minlength"
+            [maxlength]="form['offlinePdf'].config.maxlength"
+            [pattern]="form['offlinePdf'].config.pattern"
+            [email]="form['offlinePdf'].config.email"
+            [v-url-validator]="
+              !!form['offlinePdf'].config.customValidators['urlValidator']
+            "
+            [mask]="
+              form['offlinePdf'].config.mask &&
+              form['offlinePdf'].config.maskConfig.mask
+                ? form['offlinePdf'].config.maskConfig.mask
+                : null
+            "
+            [dropSpecialCharacters]="
+              form['offlinePdf'].config.mask &&
+              form['offlinePdf'].config.maskConfig.dropSpecialCharacters
+                ? form['offlinePdf'].config.maskConfig.dropSpecialCharacters
+                : true
+            "
+            [validation]="
+              form['offlinePdf'].config.mask &&
+              form['offlinePdf'].config.maskConfig.validation
+                ? form['offlinePdf'].config.maskConfig.validation
+                : false
+            "
+          />
+          <mat-hint *ngIf="form['offlinePdf'].config.hint">{{
+            form["offlinePdf"].config.hint
+          }}</mat-hint>
+          <mat-error *ngIf="getErrorText(form['offlinePdf'])">
+            {{ getErrorText(form["offlinePdf"]) }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row hide">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>{{ form["newTabPdf"].label }}</mat-label>
+          <input
+            matInput
+            [type]="form['newTabPdf'].config.type"
+            [name]="form['newTabPdf'].config.name"
+            [(ngModel)]="form['newTabPdf'].value"
+            [placeholder]="form['newTabPdf'].config.placeholder"
+            [disabled]="form['newTabPdf'].config.disabled"
+            [readonly]="form['newTabPdf'].config.readonly"
+            [required]="form['newTabPdf'].config.required"
+            [minlength]="form['newTabPdf'].config.minlength"
+            [maxlength]="form['newTabPdf'].config.maxlength"
+            [pattern]="form['newTabPdf'].config.pattern"
+            [email]="form['newTabPdf'].config.email"
+            [v-url-validator]="
+              !!form['newTabPdf'].config.customValidators['urlValidator']
+            "
+            [mask]="
+              form['newTabPdf'].config.mask &&
+              form['newTabPdf'].config.maskConfig.mask
+                ? form['newTabPdf'].config.maskConfig.mask
+                : null
+            "
+            [dropSpecialCharacters]="
+              form['newTabPdf'].config.mask &&
+              form['newTabPdf'].config.maskConfig.dropSpecialCharacters
+                ? form['newTabPdf'].config.maskConfig.dropSpecialCharacters
+                : true
+            "
+            [validation]="
+              form['newTabPdf'].config.mask &&
+              form['newTabPdf'].config.maskConfig.validation
+                ? form['newTabPdf'].config.maskConfig.validation
+                : false
+            "
+          />
+          <mat-hint *ngIf="form['newTabPdf'].config.hint">{{
+            form["newTabPdf"].config.hint
+          }}</mat-hint>
+          <mat-error *ngIf="getErrorText(form['newTabPdf'])">
+            {{ getErrorText(form["newTabPdf"]) }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col pdf">
+        <!-- <p>{{ selectedFile?.name }}</p> -->
+        <button
+          mat-raised-button
+          [color]="selectedFile || editData?.pdfPath ? 'primary' : 'accent'"
+          (click)="pdfPathInput.click()"
+        >
+          {{
+            selectedFile || editData?.pdfPath
+              ? "PDF Selecionado"
+              : "Selecionar PDF"
+          }}
+        </button>
+        <button
+          [class.hide]="!selectedFile || editData?.pdfPath"
+          mat-icon-button
+          type="button"
+          (click)="clearSelectedFile()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <input
+          type="file"
+          #pdfPathInput
+          class="hide"
+          accept="application/pdf"
+          (change)="handleFileInputChange($event.target!)"
+        />
+      </div>
+
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4>Dias da semana</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-accordion class="example-headers-align">
+          <mat-expansion-panel
+            [expanded]="step === 0"
+            (opened)="setStep(0)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Semana 1 </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngFor="let item of trainingDays; let i = index">
+              <ng-container *ngIf="i < 7">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{ item.label }}</mat-label>
+                  <mat-select
+                    [(ngModel)]="item.value"
+                    (ngModelChange)="getDistinctWorkouts()"
+                    [name]="item.config.name"
+                    [placeholder]="item.config.placeholder"
+                    [disabled]="item.config.disabled"
+                    [required]="item.config.required"
+                  >
+                    <mat-option
+                      *ngFor="let item of item.selectOptions"
+                      [value]="item.value"
+                    >
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="item.config.hint">{{
+                    form["url"].config.hint
+                  }}</mat-hint>
+                  <mat-error *ngIf="getErrorText(item)">
+                    {{ getErrorText(item) }}
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+            </ng-container>
+
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">
+                Next
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel
+            [expanded]="step === 1"
+            (opened)="setStep(1)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Semana 2 </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngFor="let item of trainingDays; let i = index">
+              <ng-container *ngIf="i >= 7 && i < 14">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{ item.label }}</mat-label>
+                  <mat-select
+                    [(ngModel)]="item.value"
+                    (ngModelChange)="getDistinctWorkouts()"
+                    [name]="item.config.name"
+                    [placeholder]="item.config.placeholder"
+                    [disabled]="item.config.disabled"
+                    [required]="item.config.required"
+                  >
+                    <mat-option
+                      *ngFor="let item of item.selectOptions"
+                      [value]="item.value"
+                    >
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="item.config.hint">{{
+                    form["url"].config.hint
+                  }}</mat-hint>
+                  <mat-error *ngIf="getErrorText(item)">
+                    {{ getErrorText(item) }}
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+            </ng-container>
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">
+                Next
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel
+            [expanded]="step === 2"
+            (opened)="setStep(2)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Semana 3 </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngFor="let item of trainingDays; let i = index">
+              <ng-container *ngIf="i >= 14 && i < 21">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{ item.label }}</mat-label>
+                  <mat-select
+                    [(ngModel)]="item.value"
+                    (ngModelChange)="getDistinctWorkouts()"
+                    [name]="item.config.name"
+                    [placeholder]="item.config.placeholder"
+                    [disabled]="item.config.disabled"
+                    [required]="item.config.required"
+                  >
+                    <mat-option
+                      *ngFor="let item of item.selectOptions"
+                      [value]="item.value"
+                    >
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="item.config.hint">{{
+                    form["url"].config.hint
+                  }}</mat-hint>
+                  <mat-error *ngIf="getErrorText(item)">
+                    {{ getErrorText(item) }}
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+            </ng-container>
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">
+                Next
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel
+            [expanded]="step === 3"
+            (opened)="setStep(3)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title> Semana 4 </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngFor="let item of trainingDays; let i = index">
+              <ng-container *ngIf="i >= 21 && i < 28">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{ item.label }}</mat-label>
+                  <mat-select
+                    [(ngModel)]="item.value"
+                    (ngModelChange)="getDistinctWorkouts()"
+                    [name]="item.config.name"
+                    [placeholder]="item.config.placeholder"
+                    [disabled]="item.config.disabled"
+                    [required]="item.config.required"
+                  >
+                    <mat-option
+                      *ngFor="let item of item.selectOptions"
+                      [value]="item.value"
+                    >
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint *ngIf="item.config.hint">{{
+                    form["url"].config.hint
+                  }}</mat-hint>
+                  <mat-error *ngIf="getErrorText(item)">
+                    {{ getErrorText(item) }}
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+            </ng-container>
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">
+                Next
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+
+    <div class="row short-names" style="margin-top: 1.5em">
+      <div class="col">
+        <h4>Nomes para a tabela</h4>
+      </div>
+
+      <div class="row" *ngFor="let item of shortNamesInputs">
+        <!-- {{ "short-name_" + item.exerciseGroupId | json }} :::<br /> -->
+
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ item.name }}</mat-label>
+            <input
+              matInput
+              [name]="'short-name_' + item.exerciseGroupId"
+              [(ngModel)]="item.defaultShortName"
+              />
+              <!-- [value]="item.defaultValue" -->
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col submit-col">
+        <button
+          class="submit-btn"
+          type="button"
+          mat-raised-button
+          color="primary"
+          [disabled]="reactiveForm.invalid"
+          (click)="onSubmit()"
+        >
+          Salvar
+        </button>
+        <button
+          mat-icon-button
+          aria-label="Help Form Button"
+          type="button"
+          class="help-btn"
+          [class.show]="reactiveForm.invalid"
+          [matTooltip]="issueValues()"
+          matTooltipClass="multiline-tooltip"
+        >
+          <mat-icon>help</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

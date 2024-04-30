@@ -1,0 +1,76 @@
+<form #formModel="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="pat@example.com"
+      type="email"
+      name="email"
+      [(ngModel)]="form.email"
+      (ngModelChange)="changeFormValue()"
+      email
+      required
+    />
+    <mat-error *ngIf="getControl(formModel, 'email')">{{
+      getErrorMessage(formModel, "email")
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome completo</mat-label>
+    <input
+      matInput
+      placeholder="Seu nome"
+      type="text"
+      name="fullName"
+      [(ngModel)]="form.fullName"
+      (ngModelChange)="changeFormValue()"
+      required
+    />
+    <mat-error *ngIf="getControl(formModel, 'fullName')">{{
+      getErrorMessage(formModel, "fullName")
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Senha</mat-label>
+    <input
+      matInput
+      [type]="passwordToogleVisibility ? 'password' : 'text'"
+      name="password"
+      [(ngModel)]="form.password"
+      (ngModelChange)="changeFormValue()"
+      required
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="passwordToogleVisibility = !passwordToogleVisibility"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="passwordToogleVisibility"
+    >
+      <mat-icon>{{
+        passwordToogleVisibility ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </button>
+    <mat-error *ngIf="getControl(formModel, 'email')">{{
+      getErrorMessage(formModel, "password")
+    }}</mat-error>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!formModel.valid"
+      (click)="submit()"
+    >
+      Entrar
+    </button>
+  </div>
+
+  <div class="alternative-links">
+    <span>
+      Já possui uma conta?
+      <a (click)="goToSignIn()"> Entre agora </a>
+    </span>
+  </div>
+</form>

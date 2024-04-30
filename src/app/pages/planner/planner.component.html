@@ -1,0 +1,412 @@
+<section id="planner" *ngIf="planner !== null">
+  <!-- Header -->
+  <div class="header">
+    <!-- Nome do treino -->
+    <img src="assets/logo2.png" class="logo" alt="Logo Tay Training" />
+    <h1 class="title">Ficha de treino | Academia</h1>
+
+    <h2 class="planner-title">{{ planner!.publicName }}</h2>
+  </div>
+
+  <div class="div" id="table">
+    <!-- Tabela de treinos -->
+
+    <table>
+      <thead>
+        <th></th>
+        <th>Sem. 1</th>
+        <th>Sem. 2</th>
+        <th>Sem. 3</th>
+        <th>Sem. 4</th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Segunda</td>
+          <td *ngFor="let item of mountTable(2)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Terça</td>
+          <td *ngFor="let item of mountTable(3)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Quarta</td>
+          <td *ngFor="let item of mountTable(4)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Quinta</td>
+          <td *ngFor="let item of mountTable(5)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Sexta</td>
+          <td *ngFor="let item of mountTable(6)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Sábado</td>
+          <td *ngFor="let item of mountTable(7)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Domingo</td>
+          <td *ngFor="let item of mountTable(1)">
+            <span
+              [matTooltip]="
+                (item?.exerciseGroup)!.publicName
+                  ? (item?.exerciseGroup)!.publicName
+                  : (item?.exerciseGroup)!.name
+              "
+              matTooltipPosition="right"
+            >
+              {{
+                item === null || item === undefined
+                  ? "OFF"
+                  : getExerciseSetName(item.exerciseGroupId)
+              }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="about-table">
+      <i>
+        Essa tabela é uma sugestão de como organizar seus treinos na semana.
+      </i>
+    </h3>
+  </div>
+
+  <!-- Lista de treinos -->
+  <div class="workouts">
+    <div
+      class="workout"
+      *ngFor="let item of distinctWorkoutsSorted; let i = index"
+    >
+      <!-- Treino  -->
+
+      <h3 class="workout-title">
+        {{ getExerciseSetName(item!.t.exerciseGroupId!) }} -
+        {{
+          item?.t?.exerciseGroup?.publicName
+            ? item?.t?.exerciseGroup?.publicName
+            : item?.t?.exerciseGroup?.name
+        }}
+      </h3>
+
+      <mat-accordion>
+        <mat-expansion-panel
+          *ngFor="
+            let workout of orderExMethods(
+              item?.t?.exerciseGroup?.exerciseMethods!
+            );
+            let iw = index
+          "
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <!-- Collapse Nome do treino/combinação -->
+              {{
+                iw +
+                  1 +
+                  (workout.exerciseConfigurations!.length === 1
+                    ? "º - Exercício "
+                    : "º - Combinação ")
+              }}
+              -
+              {{ getWorkoutMultiName(item!.t.exerciseGroupId!, workout.id!) }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <!-- {{ workout.method | json }} -->
+
+          <ng-container *ngIf="workout.exerciseConfigurations!.length < 2">
+            <p style="margin-top: 1em">
+              Série/Repetição:
+              {{
+                workout.exerciseConfigurations![0]
+                  ? workout.exerciseConfigurations![0]!.series
+                  : ""
+              }}
+              x
+              {{
+                workout.exerciseConfigurations![0]
+                  ? workout.exerciseConfigurations![0]!.reps
+                  : ""
+              }}
+            </p>
+          </ng-container>
+          <p
+            class="rest p-spacer"
+            *ngIf="workout.exerciseConfigurations!.length === 1"
+          >
+            Tempo de descanso: {{ workout?.rest }}
+          </p>
+
+          <!-- Tempo de descanso -->
+          <ng-container *ngIf="workout.exerciseConfigurations!.length < 2">
+            <p
+              *ngIf="
+                workout.exerciseConfigurations![0] &&
+                workout.exerciseConfigurations![0]!.method?.name
+              "
+            >
+              Método:
+              {{
+                workout.exerciseConfigurations![0]
+                  ? workout.exerciseConfigurations![0]!.method?.name
+                  : ""
+              }}
+            </p>
+          </ng-container>
+          <!-- Observações -->
+
+          <!-- <hr class="divider-1" /> -->
+
+          <!-- Exercicios -->
+          <!-- Collapse Exercicio -->
+
+          <ng-container
+            *ngIf="
+              workout.exerciseConfigurations!.length === 1 &&
+              workout.exerciseConfigurations![0].exercise?.videoUrl
+            "
+          >
+            <mat-expansion-panel
+              [hideToggle]="false"
+              class="video p-spacer"
+              (opened)="matExpansionOpened(workout.exerciseConfigurations![0])"
+            >
+              <!-- Video -->
+              <!-- Collapse -->
+              <mat-expansion-panel-header>
+                <mat-panel-title>Video Explicativo</mat-panel-title>
+              </mat-expansion-panel-header>
+              <!-- Iframe resposnsivo -->
+              <div
+                class="iframe-container"
+                *ngIf="
+                  secIframeLink(workout.exerciseConfigurations![0]!.id!)
+                    .showIframe
+                "
+              >
+                <iframe
+                  width="560"
+                  height="315"
+                  [src]="
+                    secIframeLink(workout.exerciseConfigurations![0]!.id!).url
+                  "
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  (load)="iframeLoaded(workout.exerciseConfigurations![0]!)"
+                ></iframe>
+              </div>
+              <img
+                *ngIf="
+                  !secIframeLink(workout.exerciseConfigurations![0]!.id!)
+                    .showIframe
+                "
+                class="miniature-video"
+                width="560"
+                height="315"
+                [src]="
+                  secIframeLink(workout.exerciseConfigurations![0]!.id!)
+                    .miniature
+                "
+                alt=""
+              />
+              <!-- Iframe resposnsivo -->
+            </mat-expansion-panel>
+          </ng-container>
+          <ng-container *ngIf="workout.exerciseConfigurations!.length > 1">
+            <mat-expansion-panel
+              [hideToggle]="false"
+              class="single-exercise"
+              *ngFor="
+                let exercise of workout.exerciseConfigurations;
+                let wec = index
+              "
+              [class.p-spacer]="wec === 0"
+            >
+              <mat-expansion-panel-header>
+                {{ exercise.exercise?.name }}
+              </mat-expansion-panel-header>
+
+              <!-- Exercicio Desc -->
+              <!-- <p class="desc-ex">Descrição: {{ exercise.exercise?.description }}</p> -->
+              <!-- Exercicio Series/Reps -->
+              <!-- Metodo -->
+              <ng-container *ngIf="exercise?.method">
+                <p class="method" style="margin-top: 1em">
+                  Método: {{ exercise?.method?.name }}
+                </p>
+              </ng-container>
+              <p>
+                Série/Repetição: {{ exercise.series }} x {{ exercise.reps }}
+              </p>
+
+              <!-- Video -->
+              <!-- Collapse -->
+              <div class="video" *ngIf="exercise.exercise?.videoUrl">
+                <mat-expansion-panel (opened)="matExpansionOpened(exercise)">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>Video Explicativo</mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <!-- Iframe resposnsivo -->
+                  <div
+                    class="iframe-container"
+                    *ngIf="secIframeLink(exercise.id!).showIframe"
+                  >
+                    <iframe
+                      width="560"
+                      height="315"
+                      [src]="secIframeLink(exercise.id!).url"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      (load)="iframeLoaded(exercise)"
+                    ></iframe>
+                  </div>
+                  <img
+                    *ngIf="!secIframeLink(exercise.id!).showIframe"
+                    class="miniature-video"
+                    width="560"
+                    height="315"
+                    [src]="
+                      secIframeLink(workout.exerciseConfigurations![0]!.id!)
+                        .miniature
+                    "
+                    alt=""
+                  />
+                  <!-- Iframe resposnsivo -->
+                </mat-expansion-panel>
+              </div>
+            </mat-expansion-panel>
+          </ng-container>
+
+          <p
+            class="rest p-spacer"
+            *ngIf="workout.exerciseConfigurations!.length > 1"
+          >
+            Tempo de descanso: {{ workout?.rest }}
+          </p>
+          <p class="obs" *ngIf="workout.observations">
+            Sobre o exercicio: {{ workout?.observations }}
+          </p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <div class="offline" *ngIf="planner.pdfPath">
+    <button mat-raised-button color="primary" (click)="openPdf()">
+      Abrir PDF
+    </button>
+  </div>
+  <!-- <div class="offline" *ngIf="planner.offlinePdf || planner.newTabPdf">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="newTabPDF()"
+      *ngIf="planner.newTabPdf"
+    >
+      Abrir PDF
+    </button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="downloadPDF()"
+      *ngIf="planner.offlinePdf"
+    >
+      Baixar PDF
+    </button>
+  </div> -->
+</section>

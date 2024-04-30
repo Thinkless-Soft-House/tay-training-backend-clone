@@ -1,0 +1,70 @@
+@use "src/functions.scss" as functions;
+
+.side-menu-content {
+  @include functions.flexbox($flex-direction: column);
+
+  .header {
+    @include functions.flexbox($justify-content: center, $flex-direction: row);
+    margin: 0 0 1em 0;
+    height: 64px;
+    width: 100%;
+    text-align: center;
+
+    background-color: functions.get-theme-color("accent");
+
+    .img-logo {
+      width: 180px;
+      // height: 50px;
+      object-fit: contain;
+    }
+    .company-name {
+      margin: 0 0 0 1em;
+    }
+  }
+
+  .menu {
+    @include functions.flexbox(
+      $justify-content: center,
+      $flex-direction: column
+    );
+
+    width: 100%;
+    min-height: 100px;
+    .menu-item {
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+
+      height: 50px;
+      width: 90%;
+      @include functions.flexbox($justify-content: none, $flex-direction: row);
+
+      margin: 0 0 0.3em 0;
+      padding: 0 0.5em;
+      border-radius: 5px;
+
+      transition: background-color 0.2s ease-in-out;
+
+      .text {
+        margin: 0 0 0 1em;
+        // color: functions.get-theme-color("primary", "main-contrast");
+      }
+
+      .menu-spacer {
+        width: 24px;
+      }
+
+      &.active {
+        $background-color: functions.get-theme-color("accent", "lighter");
+        background-color: $background-color;
+        color: functions.yiq-color-contrast($background-color);
+      }
+      &:hover {
+        $background-color: functions.get-theme-color("accent", "lighter");
+        background-color: functions.adjust-color($background-color, "l", 10%);
+        color: functions.yiq-color-contrast($background-color);
+      }
+    }
+  }
+}
